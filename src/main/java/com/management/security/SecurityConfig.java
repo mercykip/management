@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public String[] WHITELIST = new String[]{
             "/api/login",
             "/api/reg",
-        //   "/api/getUsers"
+           "/createNewRole"
     };
 
 //    @Override
@@ -68,12 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.addFilterBefore(new CustomeAuthorizationFilter(),UsernamePasswordAuthenticationFilter.class);
         http.addFilter(customAuthenticationFilter);
         http.authorizeRequests().antMatchers(WHITELIST).permitAll();
-//        http.authorizeRequests()
-//                .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-//                .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
-//                .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-//                .antMatchers("/delete/**").hasAuthority("ADMIN");
-    ///    http.authorizeRequests().antMatchers("/api/getUsers").hasRole("USER");
+        http.authorizeRequests().antMatchers("/").hasAnyAuthority("USER","ADMIN");
+
         http.authorizeRequests();
 //        http.authorizeRequests().anyRequest().authenticated();
 

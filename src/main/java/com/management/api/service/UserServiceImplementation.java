@@ -39,7 +39,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
        }
         Set<GrantedAuthority> grantedAuthorities = new HashSet < > ();
         for (Role role: user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" +role.getName()));
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" +role.getRoleName()));
         }
 
         return new org.springframework.security.core.userdetails.User(
@@ -53,14 +53,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         //user.setRoles(new HashSet< >(roleRepository.findAll()));
-        user.setRoles(new HashSet< >(roleRepository.findAll()));
+       // user.setRoles(new HashSet< >(roleRepository.findAll()));
         return userRepository.save(user);
     }
 
-    @Override
-    public Role saveRole(Role role) {
-        return roleRepository.save(role);
-    }
+
 
     @Override
     public List<Users> getAllUsers(Specification specification) {
@@ -72,15 +69,5 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         return userRepository.findByUsername(username);
     }
 
-    @Override
-    public void addRoleToUser(String username, String roleName) {
-        Users user = userRepository.findByUsername(username);
-        if(user == null)
-        {
-            log.error("user not found");
-        }
-        Role role=roleRepository.findByName(roleName);
-        user.getRoles().add(role);
-    }
 
 }

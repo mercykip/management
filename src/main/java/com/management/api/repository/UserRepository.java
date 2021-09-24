@@ -10,7 +10,5 @@ import java.util.List;
 
 public interface UserRepository  extends JpaRepository<Users, Long>, JpaSpecificationExecutor<Users> {
 
-    Users findByPassword(String password);
-
     Users findByUsername(String username);
 }

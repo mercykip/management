@@ -41,7 +41,7 @@ public class TokenHelper {
                         withSubject(user.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis()+10*60*1000))
                         .withIssuer(request.getRequestURL().toString())
-                        .withClaim("roles", user.getRoles().stream().map(Role::getName)
+                        .withClaim("roles", user.getRoles().stream().map(Role::getRoleName)
                                 .collect(Collectors.toList())).sign(alg);
 
 
@@ -64,7 +64,7 @@ public class TokenHelper {
             throw new RuntimeException("Refresh token is missing");
         }
     }
-    public static void accessToken(HttpServletRequest request, HttpServletResponse response,Users user) throws IOException {
+    public static String accessToken(HttpServletRequest request, HttpServletResponse response,Users user) throws IOException {
 
 
             try{
@@ -74,7 +74,7 @@ public class TokenHelper {
                         withSubject(user.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis()+10*60*1000))
                         .withIssuer(request.getRequestURL().toString())
-                        .withClaim("roles", user.getRoles().stream().map(Role::getName)
+                        .withClaim("roles", user.getRoles().stream().map(Role::getRoleName)
                                 .collect(Collectors.toList())).sign(alg);
 
 
@@ -82,16 +82,14 @@ public class TokenHelper {
                 tokens.put("access_token",access_token);
                 //tokens.put("refresh_token",refresh_token);
                 response.setContentType(APPLICATION_JSON_VALUE);
-                new ObjectMapper().writeValue(response.getOutputStream(),tokens);
-
-
+        return access_token;
             } catch (Exception e) {
                 e.printStackTrace();
                 log.error("Error logging in : " + e.getMessage());
                 response.setHeader("error", e.getMessage());
                 response.setStatus(FORBIDDEN.value());
 
-
+        return null;
             }
     }
 
@@ -104,14 +102,14 @@ public class TokenHelper {
                 withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis()+10*60*1000))
                 .withIssuer(request.getRequestURL().toString())
-                .withClaim("roles", user.getRoles().stream().map(Role::getName)
+                .withClaim("roles", user.getRoles().stream().map(Role::getRoleName)
                         .collect(Collectors.toList())).sign(alg);
 
         String refresh_token = JWT.create().
                 withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis()+10*60*2000))
                 .withIssuer(request.getRequestURL().toString())
-                .withClaim("roles", user.getRoles().stream().map(Role::getName)
+                .withClaim("roles", user.getRoles().stream().map(Role::getRoleName)
                         .collect(Collectors.toList())).sign(alg);
 
         tokens.put("access_token",access_token);

@@ -32,9 +32,6 @@ public class UserPredicate  implements Specification<Users> {
                p.getExpressions().add(cb.equal(root.get("id"),user.getId()));
            }
 
-           if(user.getUsername() != null){
-               p.getExpressions().add(cb.equal(root.get("username"),user.getUsername()));
-           }
            if(user.getFirst_name() != null){
                p.getExpressions().add(cb.equal(root.get("first_name"),user.getFirst_name()));
            }
@@ -42,12 +39,23 @@ public class UserPredicate  implements Specification<Users> {
                p.getExpressions().add(cb.equal(root.get("last_name"),user.getLast_name()));
            }
 
+           if(user.getOther_name() != null){
+               p.getExpressions().add(cb.equal(root.get("other_name"),user.getOther_name()));
+           }
+           if(user.getPhone_number() != null){
+               p.getExpressions().add(cb.equal(root.get("phone_number"),user.getPhone_number()));
+           }
+           if(user.getUsername() != null){
+               p.getExpressions().add(cb.equal(root.get("username"),user.getUsername()));
+           }
+
            if(user.getPassword() != null){
                p.getExpressions().add(cb.equal(root.get("password"),user.getPassword()));
            }
-//           if(user.getRoles()!= null){
-//               p.getExpressions().add(cb.equal(root.get("role"),user.getRoles()));
-//           }
+
+
+
+
        }
 
        if (username != null){
