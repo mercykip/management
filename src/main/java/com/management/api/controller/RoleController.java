@@ -10,8 +10,6 @@ import static com.management.api.global.GlobalService.roleService;
 @RestController
 public class RoleController {
 
-
-
     @PostMapping({"/createNewRole"})
     public Role createNewRole(@RequestBody Role role){
         return roleService.saveRole(role);

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -26,4 +27,9 @@ public class Role {
     private Long id;
     private String roleName;
     private String roleDescription;
+
+//    @Override
+//    public String getAuthority() {
+//        return roleName;
+//    }
 }

@@ -30,13 +30,13 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        Users user=userRepository.findByUsername(username);
+
+
        if(user==null){
            log.error("user not found in the database");
            throw  new UsernameNotFoundException("User not found in database");
        }
-       else{
-           log.info("User found in the database: {}",username);
-       }
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet < > ();
         for (Role role: user.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" +role.getRoleName()));
@@ -67,6 +67,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     @Override
     public Users getAUser(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public Users updateUser(Users user) {
+        return null;
     }
 
 

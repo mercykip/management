@@ -47,31 +47,31 @@ public class JsonSetErrorResponse {
         return serviceResponse;
 
     }
-//
-//    public static PagenatedJsonResponse setErrorResponse(int code, String apiDescription, String trxId) {
-//        PagenatedJsonResponse serviceResponse = new PagenatedJsonResponse();
-//        boolean success = false;
-//        boolean hasError = true;
-//        serviceResponse.setSuccess(success);
-//        serviceResponse.setHas_error(hasError);
-//        serviceResponse.setApi_code(code);
-//        serviceResponse.setApi_code_description(apiDescription);
-//        serviceResponse.setTrx_id(trxId);
-//        return serviceResponse;
-//    }
-//
-//    public static PagenatedJsonResponse setErrorResponse(int code, String apiDescription, String trxId, Object content) {
-//        PagenatedJsonResponse serviceResponse = new PagenatedJsonResponse();
-//        boolean success = false;
-//        boolean hasError = true;
-//        serviceResponse.setSuccess(success);
-//        serviceResponse.setHas_error(hasError);
-//        serviceResponse.setApi_code(code);
-//        serviceResponse.setApi_code_description(apiDescription);
-//        serviceResponse.setTrx_id(trxId);
-//        serviceResponse.setData(content);
-//
-//        return serviceResponse;
-//    }
+
+    public static PagenatedJsonResponse setErrorResponse(int code, String apiDescription, String trxId) {
+        PagenatedJsonResponse serviceResponse = new PagenatedJsonResponse();
+        boolean success = false;
+        boolean hasError = true;
+        serviceResponse.setSuccess(success);
+        serviceResponse.setHas_error(hasError);
+        serviceResponse.setApi_code(code);
+        serviceResponse.setApi_code_description(apiDescription);
+        serviceResponse.setTrx_id(trxId);
+        return serviceResponse;
+    }
+
+    public static PagenatedJsonResponse setErrorResponse(int code, String apiDescription, String trxId, Object content) {
+        PagenatedJsonResponse serviceResponse = new PagenatedJsonResponse();
+        boolean success = false;
+        boolean hasError = true;
+        serviceResponse.setSuccess(success);
+        serviceResponse.setHas_error(hasError);
+        serviceResponse.setApi_code(code);
+        serviceResponse.setApi_code_description(apiDescription);
+        serviceResponse.setTrx_id(trxId);
+        serviceResponse.setData(content);
+
+        return serviceResponse;
+    }
 }
 

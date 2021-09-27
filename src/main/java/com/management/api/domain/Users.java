@@ -4,15 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.AUTO;
 
@@ -40,6 +35,11 @@ public class Users {
     private String username;
     @JsonProperty(value="password")
     private String password;
+    @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private  Collection<Role> roles;
 
     public Users(String first_name, String last_name, String other_name, String phone_number, String username, String password1) {
         this.first_name = first_name;
@@ -49,29 +49,6 @@ public class Users {
         this.username = username;
         this.password = password1;
     }
-
-    /// load all roles whenever the user is fetched
-    //@ManyToMany(fetch =EAGER)
-//    @JoinTable(name="user_roles",
-//            joinColumns = @JoinColumn(name="id"),
-//            inverseJoinColumns = @JoinColumn(name="role_id"))
-//    private Set<Role> roles = new HashSet<>();
-
-//    @ManyToMany(fetch = FetchType.EAGER) //anytime load user, load a role
-//    private Collection<Role> roles = new ArrayList<>();
-//@JoinTable(
-//        name = "users_roles",
-//        joinColumns = @JoinColumn(
-//                name = "id", referencedColumnName = "id"),
-//        inverseJoinColumns = @JoinColumn(
-//                name = "role_id", referencedColumnName = "id"))
-//private Collection<Role> roles;
-
-    @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private  Collection<Role> roles;
 
     public Users() {
     }

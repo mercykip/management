@@ -9,6 +9,7 @@ public interface UserService {
     Users saveUser(Users user);
     List<Users> getAllUsers(Specification specification);
     Users getAUser(String username);
+    Users updateUser(Users user);
 
 
 

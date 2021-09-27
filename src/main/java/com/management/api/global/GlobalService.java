@@ -26,6 +26,6 @@ public class GlobalService {
 
     @Autowired
     public  void setPasswordEncoder() {
-        GlobalService.passwordEncoder = new BCryptPasswordEncoder(10);
+        GlobalService.passwordEncoder = new BCryptPasswordEncoder(8);
     }
 }
